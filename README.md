@@ -1,24 +1,8 @@
-# README
+Description: Employee Services is a simple and straightforward online workplace benefits manager.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Installation: To install, fork and clone the repository, bundle install, run rake db:migrate, then rails s to see the project in your browser on localhost:3000.
 
-Things you may want to cover:
+Contribute: Feel free to add or expand on this openly and independently.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+License: MIT
+https://github.com/mjboroski/employee_services/blob/master/LICENSE.md

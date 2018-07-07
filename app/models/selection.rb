@@ -1,2 +1,7 @@
-class Selection < ApplicationRecord
+class Selection < ActiveRecord::Base
+
+  belongs_to :user
+  belongs_to :benefit
+
+
 end

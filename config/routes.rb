@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  get 'static_pages/home'
-  get 'users/new'
-  get 'users/edit'
-  get 'users/show'
-  get 'benefits/edit'
-  get 'benefits/index'
-  get 'benefits/new'
-  get 'benefits/show'
-  get 'user/new'
-  get 'user/edit'
-  get 'user/show'
-  get 'sessions/new'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "static_pages#home"
+  get "/signin", to: "sessions#new"
+  post "/sessions/create", to: "sessions#create"
+  delete "/signout", to: "sessions#destroy"
+  post "/selections/new", to: "selections#new"
+  delete "/selections", to: "selections#destroy"
+  delete "/benefits", to: "benefits#destroy"
+  get '/auth/github/callback', to: 'sessions#create'
+  resources :benefits
+  resources :selections
+  resources :users do
+    resources :benefits, only: [:index, :show]
+  end
+
 end

@@ -1,2 +1,46 @@
-<h1>Benefits#index</h1>
-<p>Find me in app/views/benefits/index.html.erb</p>
+<h1>Listing benefits</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td><strong>Description</strong></td>
+      <td><strong>Link</strong></td>
+      <td><strong>Flat Cost/Paycheck</strong></td>
+      <td><strong>Percent Cost</strong></td>
+      <td><strong>Enrolled?</strong></td>
+      <td><strong>Change Settings</strong></td>
+    </tr>
+    <% @benefits.each do |benefit| %>
+      <tr>
+
+        <td><%= benefit.name %></td>
+        <td><%= benefit.description %></td>
+        <td><%= benefit.link %></td>
+        <td>$<%= benefit.flat_cost %></td>
+        <td><%= benefit.percent_cost %>%</td>
+        <td><%= "✔" if benefit.users.include?(current_user) %></td>
+        <% if current_user.admin %>
+          <td><%= link_to "Show/Edit #{benefit.name}", user_benefit_path(current_user, benefit) %></td>
+        <% else %>
+          <td><%= link_to "Details for #{benefit.name}", user_benefit_path(current_user, benefit) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+
+<% if @user %>
+  <p>
+    <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
+  </p>
+<% else %>
+  <p><%= link_to 'New Benefit', new_benefit_path if current_user.admin %></p>
+<% end %>

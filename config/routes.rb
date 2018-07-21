@@ -7,10 +7,14 @@ Rails.application.routes.draw do
   delete "/selections", to: "selections#destroy"
   delete "/benefits", to: "benefits#destroy"
   get '/auth/github/callback', to: 'sessions#create'
+
   resources :benefits
   resources :selections
   resources :users do
-    resources :benefits, only: [:index, :show]
+    resources :benefits, only: [:index, :show] do
+      resources :selections, only: [:show]
+    end
+    resources :selections, only: [:show]
   end
 
 end

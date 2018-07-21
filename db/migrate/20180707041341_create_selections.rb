@@ -1,4 +1,4 @@
-class CreateSelections < ActiveRecord::Migration[5.2]
+class CreateSelections < ActiveRecord::Migration[5.1]
   def change
     create_table :selections do |t|
       t.belongs_to :user, foreign_key: true

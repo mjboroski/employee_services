@@ -12,7 +12,8 @@
     <div class="greeting">
       <%= render partial: 'greeting' %>
     </div>
-    <p><%= link_to 'Edit Account', edit_user_path(@user) %></p>
-    <p><%= link_to 'My Benefits', user_benefits_path(@user) %></p>
+    <p class="edit_account"><%= link_to 'Edit Account', edit_user_path(@user), :class => "load_user_form" %></p>
+    <%= render 'form' %>
   </div>
+  <p><%= link_to 'My Benefits', user_benefits_path(@user) %></p>
 </div>

@@ -27,12 +27,9 @@ class UsersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-      else
-        format.html { render :edit }
-      end
+    respond_to :html, :js
+    if @user.update(user_params)
+      render partial: 'greeting'
     end
   end
 

@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   def show
     @message = params[:message] if params[:message]
     @message ||= false
-    set_user
+    render :show
+  end
+
+  def get_json
+    render :json => @user
   end
 
   def new

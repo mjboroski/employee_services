@@ -7,6 +7,15 @@ $(function(){
     e.preventDefault();
   })
 
+  var json_url = $("a#user_path_target").attr("href") + "/get_json"
+  $.ajax({
+    type: 'get',
+    url: json_url,
+    dataType: 'json',
+    success: function(response){
+    alert(response);
+  }})
+
   $("form.edit_user").on("submit", function(e){
     var url = this.action
     var data = $(this).serialize();

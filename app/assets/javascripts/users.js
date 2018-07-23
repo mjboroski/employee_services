@@ -1,4 +1,6 @@
 $(function(){
+  var source = $("#benefits-template").html();
+  var template = Handlebars.compile(source);
 
   function urlSetter(jsonScope){
     switch (jsonScope){
@@ -29,10 +31,9 @@ $(function(){
     var benefits = response.benefits
     benefits.forEach(function(benefit){
       $('#benefits_body').append(template(benefit))
-    }
+    })
   }
-
-  // userData(urlSetter(user), benefitsPopulation)
+  userData(urlSetter("user"), benefitsPopulation)
 
   $("form.edit_user").hide()
   $('div.actions input').removeAttr('data-disable-with');

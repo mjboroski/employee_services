@@ -22,18 +22,24 @@ $(function(){
     }})
   }
 
-  function selectionsPopulation(response){
+  function beneficiariesPopulation(response, benefit){
     var selections = response.selections
+    selections.forEach(function(selection){
+      if (selection.benefit_id == benefit.id){
+        benefit.beneficiaries = selection.beneficiaries
+      }
+    })
   }
 
   function benefitsPopulation(response){
     var benefits = response.benefits
     benefits.forEach(function(benefit){
+      beneficiariesPopulation(response, benefit)
       $('#benefits_body').append(template(benefit))
     })
   }
 
-  // userData(urlSetter("user"), benefitsPopulation)
+  userData(urlSetter("user"), benefitsPopulation)
 
   $("form.edit_user").hide()
   $('div.actions input').removeAttr('data-disable-with');

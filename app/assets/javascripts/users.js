@@ -1,25 +1,24 @@
 $(function(){
+
   var source = $("#benefits-template").html();
   var template = Handlebars.compile(source);
 
   function urlSetter(jsonScope){
     switch (jsonScope){
       case "user":
-        $("a#user_path_target").attr("href") + "/get_json"
-        break;
+        return $("a#user_path_target").attr("href") + "/get_json"
       case "all":
         $("a#user_path_target").attr("href") + "/get_json"
-        break;
     }
   }
 
-  function userData(url, application){
+  function userData(url, applicationFunction){
     $.ajax({
       type: 'get',
       url: url,
       dataType: 'json',
       success: function(response){
-        application(response)
+        applicationFunction(response)
     }})
   }
 
@@ -33,7 +32,8 @@ $(function(){
       $('#benefits_body').append(template(benefit))
     })
   }
-  userData(urlSetter("user"), benefitsPopulation)
+
+  // userData(urlSetter("user"), benefitsPopulation)
 
   $("form.edit_user").hide()
   $('div.actions input').removeAttr('data-disable-with');

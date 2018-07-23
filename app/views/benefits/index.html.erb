@@ -11,20 +11,3 @@
 <% else %>
   <p><%= link_to 'New Benefit', new_benefit_path if current_user.admin %></p>
 <% end %>
-
-<script id="benefits-template" type="text/x-handlebars-template">
-  <tr>
-    <td>{{name}}></td>
-    <td>{{description}}</td>
-    <td>{{link}}</td>
-    <td>${{flat_cost}}</td>
-    <td>{{percent_cost}}%</td>
-    <td>{{beneficiaries}}</td>
-
-    <!-- <% if current_user.admin %>
-      <td><%#= link_to "Edit", user_benefit_path(current_user, benefit) %></td>
-    <% else %>
-      <td><%#= link_to "Details", user_benefit_path(current_user, benefit) %></td>
-    <% end %> -->
-  </tr>
-</script>

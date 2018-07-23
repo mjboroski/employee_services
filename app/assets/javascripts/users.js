@@ -1,11 +1,17 @@
 $(function(){
 
-  function urlSetter(){
-    var user_json = $("a#user_path_target").attr("href") + "/get_json"
+  function urlSetter(jsonScope){
+    switch (jsonScope){
+      case "user":
+        $("a#user_path_target").attr("href") + "/get_json"
+        break;
+      case "all":
+        $("a#user_path_target").attr("href") + "/get_json"
+        break;
+    }
   }
 
   function userData(url, application){
-    var user_json = $("a#user_path_target").attr("href") + "/get_json"
     $.ajax({
       type: 'get',
       url: url,
@@ -15,8 +21,13 @@ $(function(){
     }})
   }
 
+  function selectionsPopulation(response){
+    var selections = response.selections
+  }
+
   function benefitsPopulation(response){
-    stuff to do goes here
+    var benefits = response.benefits
+
   }
 
   $("form.edit_user").hide()

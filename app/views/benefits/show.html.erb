@@ -39,11 +39,12 @@
   <p><strong>Link:</strong>{{link}}</p>
   <p><strong>Flat Cost/Paycheck:</strong>${{flat_cost}}</p>
   <p><strong>Percentage Cost:</strong>{{percent_cost}}%</p>
-  <p><strong>Beneficiaries:</strong>{{beneficiaries}}%</p>
+  <!-- <p><strong>Beneficiaries:</strong>{{beneficiaries}}</p> -->
 </script>
 
 <script>
   var source = $("#benefits-show-template").html();
   var template = Handlebars.compile(source);
   var setter = "<%= @setter %>"
+  var benefit_id = "<%= @benefit.id %>"
 </script>

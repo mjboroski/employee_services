@@ -6,7 +6,7 @@ $(function(){
       case "all":
         return "benefits/get_json"
       case "show":
-        return "benefits/get_json_show"
+        return benefit_id+"/get_json_show"
     }
   }
 
@@ -42,7 +42,8 @@ $(function(){
   }
 
   function benefitsShowPopulation(response){
-    $('#info').prepend(showTemplate(response))
+    // response.beneficiaries = response.selections.beneficiaries
+    $('div.info').prepend(template(response))
   }
 
   function routeMaker(){

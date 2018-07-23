@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: 'sessions#create'
   get "/users/:id/get_json", to: "users#get_json"
   get "/benefits/get_json", to: "benefits#get_json"
+  get "/benefits/:id/get_json_show", to: "benefits#get_json_show"
+  get "users/:id/benefits/:id/get_json_show", to: "benefits#get_json_show"
 
   resources :benefits
   resources :selections

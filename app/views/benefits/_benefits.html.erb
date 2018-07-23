@@ -1,0 +1,31 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody id="benefits_body">
+    <tr>
+      <td><strong>Name</strong></td>
+      <td><strong>Description</strong></td>
+      <td><strong>Link</strong></td>
+      <td><strong>Flat Cost/Paycheck</strong></td>
+      <td><strong>Percent Cost</strong></td>
+      <td><strong>Beneficiaries</strong></td>
+      <td><strong>More...</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<script id="benefits-template" type="text/x-handlebars-template">
+  <tr>
+    <td>{{name}}</td>
+    <td>{{description}}</td>
+    <td>{{link}}</td>
+    <td>${{flat_cost}}</td>
+    <td>{{percent_cost}}%</td>
+    <td>{{beneficiaries}}</td>
+    <td><a href="benefits/{{id}}">{{name}} Details</td>
+  </tr>
+</script>

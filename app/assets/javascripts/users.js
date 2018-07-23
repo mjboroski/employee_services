@@ -1,14 +1,17 @@
 $(function(){
-  var json_url = $("a#user_path_target").attr("href") + "/get_json"
-  $.ajax({
-    type: 'get',
-    url: json_url,
-    dataType: 'json',
-    // data: this.serialize(),
-    success: function(response){
-    alert(response);
-  }})
 
+  function UserData(){
+    var json_url = $("a#user_path_target").attr("href") + "/get_json"
+    $.ajax({
+      type: 'get',
+      url: json_url,
+      dataType: 'json',
+      success: function(response){
+        alert(response)
+    }})
+  }
+
+  UserData()
   $("form.edit_user").hide()
   $('div.actions input').removeAttr('data-disable-with');
 

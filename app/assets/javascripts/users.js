@@ -3,6 +3,10 @@ $(function(){
   var source = $("#benefits-template").html();
   var template = Handlebars.compile(source);
 
+  // prepend this to <div class="info">
+  var sourceShow = $("#benefits-show-template").html();
+  var templateShow = Handlebars.compile(sourceShow);
+
   function urlSetter(jsonScope){
     switch (jsonScope){
       case "user":
@@ -12,13 +16,13 @@ $(function(){
     }
   }
 
-  function userData(url, applicationFunction){
+  function userData(url, appliedFunction){
     $.ajax({
       type: 'get',
       url: url,
       dataType: 'json',
       success: function(response){
-        applicationFunction(response)
+        appliedFunction(response)
     }})
   }
 

@@ -3,12 +3,7 @@
 <div class="center">
 
   <div class="info">
-    <p><strong>Name:</strong> <%= @benefit.name %></p>
-    <p><strong>Total Number of Users:</strong> <%= @benefit.users.count %></p>
-    <p><strong>Description:</strong> <%= @benefit.description %></p>
-    <p><strong>Link:</strong> <%= @benefit.link %></p>
-    <p><strong>Flat Cost/Paycheck:</strong> <%= @benefit.flat_cost %></p>
-    <p><strong>Percentage Cost:</strong> <%= @benefit.percent_cost %></p>
+
     <% if current_user.admin %>
       <%= link_to 'Edit Benefit', [:edit, @benefit], class: "btn btn-primary btn-light" %></p>
       <form action="/benefits" method="post">
@@ -37,3 +32,12 @@
     <%= link_to 'Back', benefits_path, class: "btn btn-primary btn-light" %></p>
   </div>
 </div>
+
+<script id="benefits-show-template" type="text/x-handlebars-template">
+  <p><strong>Name:</strong>{{name}}</p>
+  <p><strong>Description:</strong>{{description}}</p>
+  <p><strong>Link:</strong>{{link}}</p>
+  <p><strong>Flat Cost/Paycheck:</strong>${{flat_cost}}</p>
+  <p><strong>Percentage Cost:</strong>{{percent_cost}}%</p>
+  <p><strong>Beneficiaries:</strong>{{beneficiaries}}%</p>
+</script>

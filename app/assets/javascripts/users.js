@@ -1,14 +1,4 @@
 $(function(){
-
-  var source = $("#benefits-template").html();
-  var template = Handlebars.compile(source);
-
-  // see comment on line 58 below
-  // prepend this to <div class="info">
-
-  // var showSource = $("#benefits-show-template").html();
-  // var showTemplate = Handlebars.compile(showSource);
-
   function urlSetter(jsonScope){
     switch (jsonScope){
       case "user":
@@ -55,12 +45,15 @@ $(function(){
     $('#info').prepend(showTemplate(response))
   }
 
-  // uncomment the appropriate function depending on page... for now
-  // should i move the parameters for this function and the url setter function out to the individual views?
+  function routeMaker(){
+    if (setter == "show"){
+      return userData(urlSetter(setter), benefitsShowPopulation)
+    }else{
+      return userData(urlSetter(setter), benefitsPopulation)
+    }
+  }
 
-  userData(urlSetter("user"), benefitsPopulation)
-  // userData(urlSetter("all"), benefitsPopulation)
-  // userData(urlSetter("show"), benefitsShowPopulation)
+  routeMaker()
 
   $("form.edit_user").hide()
   $('div.actions input').removeAttr('data-disable-with');

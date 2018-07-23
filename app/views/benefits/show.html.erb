@@ -41,3 +41,9 @@
   <p><strong>Percentage Cost:</strong>{{percent_cost}}%</p>
   <p><strong>Beneficiaries:</strong>{{beneficiaries}}%</p>
 </script>
+
+<script>
+  var source = $("#benefits-show-template").html();
+  var template = Handlebars.compile(source);
+  var setter = "<%= @setter %>"
+</script>

@@ -11,3 +11,9 @@
 <% else %>
   <p><%= link_to 'New Benefit', new_benefit_path if current_user.admin %></p>
 <% end %>
+
+<script>
+  var source = $("#benefits-template").html();
+  var template = Handlebars.compile(source);
+  var setter = "<%= @setter %>"
+</script>

@@ -4,13 +4,15 @@ class BenefitsController < ApplicationController
   def index
     if params[:user_id]
       @benefits = User.find(params[:user_id]).benefits
+      @setter = "user"
     else
       @benefits = Benefit.all
+      @setter = "all"
     end
   end
 
   def show
-
+    @setter = "show"
   end
 
   def get_json
@@ -71,5 +73,4 @@ class BenefitsController < ApplicationController
         :percent_cost
       )
     end
-
 end

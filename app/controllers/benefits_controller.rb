@@ -1,5 +1,5 @@
 class BenefitsController < ApplicationController
-  before_action :set_benefit, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_benefit, only: [ :show, :edit, :update, :destroy, :get_json_show ]
 
   def index
     if params[:user_id]
@@ -10,12 +10,16 @@ class BenefitsController < ApplicationController
   end
 
   def show
-    set_benefit
+
   end
 
   def get_json
     @benefits = Benefit.all
     render :json => @benefits
+  end
+
+  def get_json_show
+    render :json => @benefit
   end
 
   def new

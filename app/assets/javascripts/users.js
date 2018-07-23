@@ -3,9 +3,11 @@ $(function(){
   var source = $("#benefits-template").html();
   var template = Handlebars.compile(source);
 
+  // see comment on line 58 below
   // prepend this to <div class="info">
-  var sourceShow = $("#benefits-show-template").html();
-  var templateShow = Handlebars.compile(sourceShow);
+
+  // var showSource = $("#benefits-show-template").html();
+  // var showTemplate = Handlebars.compile(showSource);
 
   function urlSetter(jsonScope){
     switch (jsonScope){
@@ -13,6 +15,8 @@ $(function(){
         return $("a#user_path_target").attr("href") + "/get_json"
       case "all":
         return "benefits/get_json"
+      case "show":
+        return "benefits/get_json_show"
     }
   }
 
@@ -47,8 +51,16 @@ $(function(){
     })
   }
 
+  function benefitsShowPopulation(response){
+    $('#info').prepend(showTemplate(response))
+  }
+
+  // uncomment the appropriate function depending on page... for now
+  // should i move the parameters for this function and the url setter function out to the individual views?
+
   userData(urlSetter("user"), benefitsPopulation)
   // userData(urlSetter("all"), benefitsPopulation)
+  // userData(urlSetter("show"), benefitsShowPopulation)
 
   $("form.edit_user").hide()
   $('div.actions input').removeAttr('data-disable-with');

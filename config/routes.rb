@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete "/benefits", to: "benefits#destroy"
   get '/auth/github/callback', to: 'sessions#create'
   get "/users/:id/get_json", to: "users#get_json"
+  get "/benefits/get_json", to: "benefits#get_json"
 
   resources :benefits
   resources :selections

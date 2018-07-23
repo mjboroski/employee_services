@@ -1,17 +1,24 @@
 $(function(){
 
-  function UserData(){
-    var json_url = $("a#user_path_target").attr("href") + "/get_json"
+  function urlSetter(){
+    var user_json = $("a#user_path_target").attr("href") + "/get_json"
+  }
+
+  function userData(url, application){
+    var user_json = $("a#user_path_target").attr("href") + "/get_json"
     $.ajax({
       type: 'get',
-      url: json_url,
+      url: url,
       dataType: 'json',
       success: function(response){
-        alert(response)
+        application(response)
     }})
   }
 
-  UserData()
+  function benefitsPopulation(response){
+    stuff to do goes here
+  }
+
   $("form.edit_user").hide()
   $('div.actions input').removeAttr('data-disable-with');
 

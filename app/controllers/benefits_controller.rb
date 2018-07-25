@@ -35,9 +35,11 @@ class BenefitsController < ApplicationController
     @benefit = Benefit.new(benefit_params)
     respond_to do |format|
       if @benefit.save
-        format.html { redirect_to @benefit, notice: 'Benefit was successfully created.' }
+        # set_benefit
+        format.html { render :json => @benefit }
       else
-        format.html { render :new }
+        # set_benefit
+        format.json { render :json => @benefit }
       end
     end
   end

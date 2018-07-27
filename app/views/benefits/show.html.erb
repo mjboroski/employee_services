@@ -34,12 +34,31 @@
 </div>
 
 <script id="benefits-show-template" type="text/x-handlebars-template">
+  <form action="/benefits/update" method="post">
+    <form action="/benefits" method="post">
+      <input type="hidden" name="_method" value="patch" >
+      <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+      <%= tag(:input, :type => "hidden", :name => :id, :value => @benefit.name) %>
+      <div class="form-group">
+        <label for="benefit_description">Name</label><br>
+        <input class="form-control" type="text" name="benefit[name]" id="benefit_name" /></div>
+      <input class="btn btn-light" type="submit" value="Update Name">
+    </form>
   <p><strong>Name:</strong>{{name}}</p>
   <p><strong>Description:</strong>{{description}}</p>
   <p><strong>Link:</strong>{{link}}</p>
   <p><strong>Flat Cost/Paycheck:</strong>${{flat_cost}}</p>
   <p><strong>Percentage Cost:</strong>{{percent_cost}}%</p>
   <!-- <p><strong>Beneficiaries:</strong>{{beneficiaries}}</p> -->
+  function updateName("benefits/", appliedFunction){
+    $.ajax({
+      type: 'get',
+      url: url,
+      dataType: 'json',
+      success: function(response){
+        Benefit.prototype.editName(response.name)
+    }})
+  }
 </script>
 
 <script>

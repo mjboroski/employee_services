@@ -1,5 +1,5 @@
 $(function(){
-  
+
   function urlSetter(jsonScope){
     switch (jsonScope){
       case "user":

@@ -54,6 +54,12 @@
     this.percent_cost = response.percent_cost
   }
 
+  Benefit.prototype.editName = (newName) => {
+    this.name = newName
+  }
+
+  
+
   $("form#new_benefit").hide()
   $('div.actions input').removeAttr('data-disable-with');
 

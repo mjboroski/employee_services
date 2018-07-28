@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def update
     respond_to :html, :js
     if @user.update(user_params)
-      render partial: 'greeting'
+      render :json => @user
     end
   end
 

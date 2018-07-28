@@ -16,7 +16,6 @@ document.addEventListener("turbolinks:load", function() {
   User.prototype.renderGreeting = function() {
     var returnString = "<p><strong>Welcome, </strong>"+this.userName+"!</p>"
     var addonString = "<p><strong>ADMIN</strong></p>\n"
-    // USE:
     if (this.admin){
       returnString = addonString.concat(returnString)
     }

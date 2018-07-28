@@ -14,8 +14,8 @@ document.addEventListener("turbolinks:load", function() {
   }
 
   User.prototype.renderGreeting = function() {
-    var returnString = "<p><strong>Welcome, </strong>"+this.userName+"!</p>"
-    var addonString = "<p><strong>ADMIN</strong></p>\n"
+    let returnString = "<p><strong>Welcome, </strong>"+this.userName+"!</p>"
+    let addonString = "<p><strong>ADMIN</strong></p>\n"
     if (this.admin){
       returnString = addonString.concat(returnString)
     }
@@ -23,8 +23,8 @@ document.addEventListener("turbolinks:load", function() {
   }
 
   $("form.edit_user").on("submit", function(e){
-    var url = this.action
-    var data = $(this).serialize();
+    let url = this.action
+    let data = $(this).serialize();
     $.ajax({
       type: "patch",
       url: url,
@@ -32,9 +32,9 @@ document.addEventListener("turbolinks:load", function() {
       success: function(response){
         $("form.edit_user").hide("fast");
         $(".greeting").contents().remove();
-        var json = JSON.parse(response);
-        var currentUser = new User(json.admin, json.name)
-        var injection = currentUser.renderGreeting()
+        let json = JSON.parse(response);
+        let currentUser = new User(json.admin, json.name)
+        let injection = currentUser.renderGreeting()
         $(".greeting").append(injection);
       }
     })
@@ -64,7 +64,7 @@ document.addEventListener("turbolinks:load", function() {
 
   function beneficiariesPopulation(response, benefit){
     if (!!response.selections){
-      var selections = response.selections
+      let selections = response.selections
       selections.forEach(function(selection){
         if (selection.benefit_id == benefit.id){
           benefit.beneficiaries = selection.beneficiaries || 0
@@ -76,7 +76,7 @@ document.addEventListener("turbolinks:load", function() {
   }
 
   function benefitsPopulation(response){
-    var benefits = response.benefits || response
+    let benefits = response.benefits || response
     benefits.forEach(function(benefit){
       beneficiariesPopulation(response, benefit)
       $('#benefits_body').append(template(benefit))
@@ -104,8 +104,8 @@ document.addEventListener("turbolinks:load", function() {
   });
 
   $("form#new_benefit").on("submit", function(e){
-    var url = this.action
-    var data = $(this).serialize();
+    let url = this.action
+    let data = $(this).serialize();
     $.ajax({
       type: "post",
       url: url,
@@ -120,12 +120,12 @@ document.addEventListener("turbolinks:load", function() {
 
   routeMaker();
 
-  var table = $('table');
+  let table = $('table');
 
   $('th.sortable')
       .wrapInner('<span title="sort this column"/>')
       .each(function(){
-          var th = $(this),
+          let th = $(this),
               thIndex = th.index(),
               inverse = false;
           th.click(function(){

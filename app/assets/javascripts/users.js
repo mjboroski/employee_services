@@ -121,8 +121,6 @@ document.addEventListener("turbolinks:load", function() {
 
   routeMaker();
 
-  // sort benefits index(do last):
-
   var table = $('table');
 
   $('th.sortable')
@@ -146,7 +144,4 @@ document.addEventListener("turbolinks:load", function() {
               inverse = !inverse;
           });
       });
-
-  // for more, read:
-  // https://stackoverflow.com/questions/3160277/jquery-table-sort
 })

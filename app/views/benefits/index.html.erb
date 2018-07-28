@@ -8,8 +8,8 @@
   <p>
     <%= link_to "Back to profile", user_path(@user), {:class => "btn btn-primary"} %>
   </p>
-<% else %>
-  <p id="new_benefit_link"><%= link_to 'New Benefit', new_benefit_path if current_user.admin %></p>
+<% elsif current_user.admin %>
+  <p id="new_benefit_link"><%= link_to 'New Benefit', new_benefit_path %></p>
 
   <form class="new_benefit" id="new_benefit" action="/benefits" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="ZdmpWQDWY6Wal9Yiwf/EuDtmGJchxSPHyFFZ1qM5chSZR0SzZ+wjjk34GPTmgDtE1FyCQvPA5KENFfA+D35i5w==" />
 
@@ -43,56 +43,4 @@
   var source = $("#benefits-template").html();
   var template = Handlebars.compile(source);
   var setter = "<%= @setter %>"
-</script>
-
-<script>
-  function Benefit(response){
-    this.name = response.name
-    this.description = response.description
-    this.link = response.link
-    this.flat_cost = response.flat_cost
-    this.percent_cost = response.percent_cost
-  }
-
-  Benefit.prototype.editName = (newName) => {
-    this.name = newName
-  }
-
-  
-
-  $("form#new_benefit").hide()
-  $('div.actions input').removeAttr('data-disable-with');
-
-  $("#new_benefit_link a").on("click", function(e){
-    $("form#new_benefit").toggle("fast");
-    e.preventDefault();
-  })
-
-  $("form#new_benefit").on("submit", function(e){
-    var url = this.action
-    var data = $(this).serialize();
-    $.ajax({
-      type: "post",
-      url: url,
-      data: data,
-      success: function(response){
-        $("form.new_benefit").hide("fast");
-        holder = new Benefit(response.html())
-        $('#benefits_body').append(template(holder))
-      }
-    })
-    e.preventDefault();
-  })
-</script>
-
-<script id="benefits-template" type="text/x-handlebars-template">
-  <tr>
-    <td>{{name}}</td>
-    <td>{{description}}</td>
-    <td>{{link}}</td>
-    <td>${{flat_cost}}</td>
-    <td>{{percent_cost}}%</td>
-    <td>{{beneficiaries}}</td>
-    <td><a href="benefits/{{id}}">{{name}} Details</td>
-  </tr>
 </script>

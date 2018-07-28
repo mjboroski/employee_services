@@ -1,4 +1,70 @@
-$(function(){
+document.addEventListener("turbolinks:load", function() {
+
+  // sort benefits index(do last):
+
+  // var table = $('table');
+  //
+  // $('.sortable th')
+  //     .wrapInner('<span title="sort this column"/>')
+  //     .each(function(){
+  //         var th = $(this),
+  //             thIndex = th.index(),
+  //             inverse = false;
+  //         th.click(function(){
+  //             table.find('td').filter(function(){
+  //                 return $(this).index() === thIndex;
+  //             }).sortElements(function(a, b){
+  //                 if( $.text([a]) == $.text([b]) )
+  //                     return 0;
+  //                 return $.text([a]) > $.text([b]) ?
+  //                     inverse ? -1 : 1
+  //                     : inverse ? 1 : -1;
+  //             }, function(){
+  //                 return this.parentNode;
+  //             });
+  //             inverse = !inverse;
+  //         });
+  //     });
+
+  // for more, read:
+  // https://stackoverflow.com/questions/3160277/jquery-table-sort
+
+  $("form.edit_user").hide()
+  $('div.actions input').removeAttr('data-disable-with');
+
+  $("p.edit_account a").on("click", function(e){
+    $("form.edit_user").toggle("fast");
+    e.preventDefault();
+  })
+
+  // function Greeting(admin, userName) {
+  //   this.admin = admin;
+  //   this.userName = userName;
+  // }
+  //
+  // Greeting.prototype.update = function() {
+  //   console.log(`updating the greting...`);
+  // }
+  //
+  // var sessionGreeting = new Greeting("True", "sarah");
+  //
+  // sessionGreeting.update();
+
+  $("form.edit_user").on("submit", function(e){
+    var url = this.action
+    var data = $(this).serialize();
+    $.ajax({
+      type: "patch",
+      url: url,
+      data: data,
+      success: function(response){
+        $("form.edit_user").hide("fast");
+        $(".greeting").contents().remove();
+        $(".greeting").append(response);
+      }
+    })
+    e.preventDefault();
+  })
 
   function urlSetter(jsonScope){
     switch (jsonScope){
@@ -43,7 +109,6 @@ $(function(){
   }
 
   function benefitsShowPopulation(response){
-    // response.beneficiaries = response.selections.beneficiaries
     $('div.info').prepend(template(response))
   }
 
@@ -55,5 +120,29 @@ $(function(){
     }
   }
 
-  routeMaker()
+  $("form#new_benefit").hide()
+  $('div.actions input').removeAttr('data-disable-with');
+
+  $("#new_benefit_link a").on("click", function(e){
+    $("form#new_benefit").toggle("fast");
+    e.preventDefault();
+  });
+
+  $("form#new_benefit").on("submit", function(e){
+    var url = this.action
+    var data = $(this).serialize();
+    $.ajax({
+      type: "post",
+      url: url,
+      data: data,
+      success: function(response){
+        $("form.new_benefit").hide("fast");
+        $('#benefits_body').append(template(response))
+      }
+    })
+    e.preventDefault();
+  });
+
+  routeMaker();
+
 })

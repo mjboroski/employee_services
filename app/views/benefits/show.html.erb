@@ -3,62 +3,47 @@
 <div class="center">
 
   <div class="info">
-
     <% if current_user.admin %>
-      <%= link_to 'Edit Benefit', [:edit, @benefit], class: "btn btn-primary btn-light" %></p>
+      <%= link_to 'Edit Benefit', [:edit, @benefit], class: "btn btn-primary btn-light" %>
       <form action="/benefits" method="post">
         <input type="hidden" name="_method" value="delete" >
         <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
         <%= tag(:input, :type => "hidden", :name => :id, :value => @benefit.id) %>
-        <input class="btn btn-light" type="submit" value="Delete">
+        <input class="btn btn-primary btn-light" type="submit" value="Delete">
       </form>
     <% end %>
+
     <% if @benefit.users.include?(current_user) %>
       <form action="/selections" method="post">
         <input type="hidden" name="_method" value="delete" >
         <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
         <%= tag(:input, :type => "hidden", :name => :selection_id, :value => @benefit.selections.ids) %>
-        <input class="btn btn-light" type="submit" value="Unenroll">
+        <input class="btn btn-primary btn-light" type="submit" value="Unenroll">
+
     <% else %>
-    <p><strong>How many beneficiaries including yourself?:</strong></p>
+      <p><strong>How many beneficiaries including yourself?:</strong></p>
       <form action="/selections/new" method="post">
         <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
         <%= tag(:input, :type => "hidden", :name => :user_id, :value => current_user.id) %>
         <%= tag(:input, :type => "hidden", :name => :benefit_id, :value => @benefit.id) %>
         <%= tag(:input, :type => "number", :name => :beneficiaries, :value => "1") %>
-        <input class="btn btn-light" type="submit" value="Enroll">
+        <input class="btn btn-primary btn-light" type="submit" value="Enroll">
+
     <% end %>
       </form>
+
     <%= link_to 'Back', benefits_path, class: "btn btn-primary btn-light" %></p>
+
   </div>
 </div>
 
 <script id="benefits-show-template" type="text/x-handlebars-template">
   <form action="/benefits/update" method="post">
-    <form action="/benefits" method="post">
-      <input type="hidden" name="_method" value="patch" >
-      <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
-      <%= tag(:input, :type => "hidden", :name => :id, :value => @benefit.name) %>
-      <div class="form-group">
-        <label for="benefit_description">Name</label><br>
-        <input class="form-control" type="text" name="benefit[name]" id="benefit_name" /></div>
-      <input class="btn btn-light" type="submit" value="Update Name">
-    </form>
   <p><strong>Name:</strong>{{name}}</p>
   <p><strong>Description:</strong>{{description}}</p>
   <p><strong>Link:</strong>{{link}}</p>
   <p><strong>Flat Cost/Paycheck:</strong>${{flat_cost}}</p>
   <p><strong>Percentage Cost:</strong>{{percent_cost}}%</p>
-  <!-- <p><strong>Beneficiaries:</strong>{{beneficiaries}}</p> -->
-  function updateName("benefits/", appliedFunction){
-    $.ajax({
-      type: 'get',
-      url: url,
-      dataType: 'json',
-      success: function(response){
-        Benefit.prototype.editName(response.name)
-    }})
-  }
 </script>
 
 <script>

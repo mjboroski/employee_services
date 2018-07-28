@@ -17,4 +17,3 @@
 //= require handlebars.min
 //= require_tree .
 //= require users
-//= require benefits

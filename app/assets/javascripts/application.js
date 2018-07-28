@@ -15,5 +15,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require handlebars.min
+//= require jquery.sortElements.js
 //= require_tree .
 //= require users
